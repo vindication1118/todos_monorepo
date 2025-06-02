@@ -1,0 +1,29 @@
+{
+  "name": "todos_api_rails",
+  "projectType": "application",
+  "root": "apps/todos_api_rails",
+  "targets": {
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bin/rails server",
+        "cwd": "apps/todos_api_rails"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bundle install && bin/rails assets:precompile",
+        "cwd": "apps/todos_api_rails"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bin/rails test",
+        "cwd": "apps/todos_api_rails"
+      }
+    }
+  },
+  "sourceRoot": "apps/todos_api_rails/app"
+}

@@ -5,7 +5,7 @@
     "emitDeclarationOnly": true,
     "importHelpers": true,
     "isolatedModules": true,
-    "lib": ["es2022"],
+    "lib": ["es2022", "dom"],
     "module": "esnext",
     "moduleResolution": "bundler",
     "noEmitOnError": true,
@@ -17,5 +17,9 @@
     "strict": true,
     "target": "es2022",
     "customConditions": ["development"]
+  },
+  "workspaceLayout": {
+    "libsDir": "libs",
+    "appsDir": "apps"
   }
 }
