@@ -1,14 +1,18 @@
 class User < ApplicationRecord
-  # Encrypts password using bcrypt
   has_secure_password
 
-  #validations
-  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, length: { minimum: 6 }, if: :password_digest_changed?
-  validates :name, presence: true
+  has_many :owned_organizations, class_name: "Organization", foreign_key: :owner_id, dependent: :destroy
+  has_many :organization_memberships, dependent: :destroy
+  has_many :organizations, through: :organization_memberships
 
-  #associations for later
-  # has_many :projects, through: :memberships
-  # belongs_to :organization, optional: true
-  # 
+  has_many :projects, dependent: :destroy  # if user is project creator
+  has_many :todos, through: :projects  # optional convenience
+
+  has_many :project_memberships, dependent: :destroy
+  has_many :joined_projects, through: :project_memberships, source: :project
+
+
+  validates :name, presence: true
+  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+
 end

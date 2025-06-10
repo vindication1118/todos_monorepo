@@ -1,10 +1,25 @@
 Rails.application.routes.draw do
-  get "users/index"
-  get "users/show"
-  get "users/create"
-  get "users/update"
-  get "sessions/create"
-  get "sessions/destroy"
+  # User routes
+  resources :users, only: [:index, :show, :create, :update]
+
+  # Session routes
+  resource :session, only: [:create, :destroy]
+
+  # Nested Orgs and projects routes
+  resources :organizations do
+    resources :projects, only: [:index, :create]
+  end
+
+  # Non nested Project Routes plus nested todos
+  resources :projects, only: [:show, :update, :destroy] do
+    resources :todos, only: [:index, :create]
+    resources :project_memberships, only: [:index, :create, :update, :destroy]
+  end
+
+  # Non nested todos Routes
+  resources :todos, only: [:show, :update, :destroy]
+
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

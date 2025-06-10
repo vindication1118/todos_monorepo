@@ -5,8 +5,6 @@ export const fetchWithAuth = async (
   method: string = 'GET',
   body?: any
 ) => {
-  if (typeof window !== 'undefined' && window.localStorage) {
-  }
   const token = localStorage.getItem('token');
   return fetch(url, {
     method,

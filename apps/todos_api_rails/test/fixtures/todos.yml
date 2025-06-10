@@ -3,13 +3,13 @@
 one:
   title: MyString
   notes: MyText
-  due_date: 2025-06-02
+  due_date: 2025-06-10
   status: MyString
   project: one
 
 two:
   title: MyString
   notes: MyText
-  due_date: 2025-06-02
+  due_date: 2025-06-10
   status: MyString
   project: two

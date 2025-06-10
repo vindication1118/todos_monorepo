@@ -1,13 +1,26 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-user = User.create!(email: "test@example.com", password: "password")
-org = Organization.create!(name: "Demo Org", user: user)
-proj = Project.create!(name: "Demo Project", organization: org, user: user)
-Todo.create!(title: "MVP Setup", project: proj, status: "todo")
+puts "Seeding data..."
+
+# Create a few users
+users = [
+  User.create!(name: "Alice", email: "alice@example.com", password: "password"),
+  User.create!(name: "Bob", email: "bob@example.com", password: "password"),
+  User.create!(name: "Charlie", email: "charlie@example.com", password: "password")
+]
+
+# Create an organization owned by Alice
+org = Organization.create!(name: "Alpha Org", owner: users[0])
+OrganizationMembership.create!(organization: org, user: users[0], organization_role: "owner")
+OrganizationMembership.create!(organization: org, user: users[1], organization_role: "member")
+
+# Create a project under the organization owned by Alice
+project = Project.create!(name: "Alpha Project", organization: org, user: users[0])
+ProjectMembership.create!(project: project, user: users[0], project_role: "owner")
+ProjectMembership.create!(project: project, user: users[1], project_role: "editor")
+
+# Add some todos
+Todo.create!([
+  { title: "Initial Setup", status: "pending", project: project },
+  { title: "Deploy MVP", status: "in_progress", project: project }
+])
+
+puts "Seeded #{User.count} users, #{Organization.count} orgs, #{Project.count} projects, #{Todo.count} todos"
