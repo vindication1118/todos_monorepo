@@ -1,0 +1,135 @@
+{
+  "info": {
+    "name": "Rails Todos API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Signup",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/signup",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["signup"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["login"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Create Organization",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/organizations",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["organizations"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"My Organization\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Create Project",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/projects",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["projects"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"My Project\",\n  \"organization_id\": \"org-uuid\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Create Todo",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/todos",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["todos"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Write some code\",\n  \"description\": \"Don't forget tests\",\n  \"project_id\": \"proj-uuid\",\n  \"status\": \"todo\"\n}"
+        }
+      }
+    }
+  ]
+}
